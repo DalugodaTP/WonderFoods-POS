@@ -1,0 +1,45 @@
+
+Q
+java:S3740-"/Provide the parametrized type for this generic.(ºšãÿıÿÿÿÿ8çùÆşÆ1
+L
+java:S37400"/Provide the parametrized type for this generic.(Œà•®8çùÆşÆ1
+L
+java:S37403"/Provide the parametrized type for this generic.(´°æ¸8çùÆşÆ1
+Q
+java:S37406"/Provide the parametrized type for this generic.(ù‚©·üÿÿÿÿ8çùÆşÆ1
+Q
+java:S37409"/Provide the parametrized type for this generic.(ä£ØÀüÿÿÿÿ8èùÆşÆ1
+n
+java:S1192“"PDefine a constant instead of duplicating this literal "Duplicate Entry" 4 times.(Ÿ·ı¥8éùÆşÆ1
+u
+java:S1104"SMake btnSave a static final constant or non-public and provide accessors if needed.(Æ ‡’úÿÿÿÿ8êùÆşÆ1
+r
+java:S1104"UMake btnReload a static final constant or non-public and provide accessors if needed.(‘•õû8êùÆşÆ1
+w
+java:S1104"UMake btnUpdate a static final constant or non-public and provide accessors if needed.(”ƒ³Šÿÿÿÿÿ8êùÆşÆ1
+z
+java:S1104"XMake customerPane a static final constant or non-public and provide accessors if needed.(šÿß­úÿÿÿÿ8êùÆşÆ1
+j
+java:S2095²"GUse try-with-resources or close this "Statement" in a "finally" clause.(ôÅ¹Îıÿÿÿÿ8ÂãàşÆ1
+i
+java:S2095X"GUse try-with-resources or close this "Statement" in a "finally" clause.(ôÅ¹Îıÿÿÿÿ8¸ˆàşÆ1
+j
+java:S2095Œ"GUse try-with-resources or close this "Statement" in a "finally" clause.(ôÅ¹Îıÿÿÿÿ8–‰¾±Ç1
+i
+java:S2095v"GUse try-with-resources or close this "Statement" in a "finally" clause.(ôÅ¹Îıÿÿÿÿ8–‰¾±Ç1
+I
+java:S1602C",Remove useless curly braces around statement(ŠĞå™8ËúÆşÆ1
+N
+java:S1602d",Remove useless curly braces around statement(·öìæşÿÿÿÿ8ÔúÆşÆ1
+O
+java:S1172ƒ"2Remove this unused method parameter "actionEvent".(ôÍf8ÜúÆşÆ1
+c
+java:S2147”"ECombine this catch with the one at line 146, which has the same body.(¼„¦Ã8ßúÆşÆ1
+P
+java:S1172¥"2Remove this unused method parameter "actionEvent".(‚ğÆØ8ãúÆşÆ1
+P
+java:S1172©"2Remove this unused method parameter "actionEvent".(ˆˆ® 8åúÆşÆ1
+c
+java:S2147º"ECombine this catch with the one at line 184, which has the same body.(¼„¦Ã8èúÆşÆ1
+U
+java:S1172Ã"2Remove this unused method parameter "actionEvent".(Íáå‘ùÿÿÿÿ8ìúÆşÆ1

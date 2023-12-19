@@ -1,0 +1,49 @@
+
+Q
+java:S37403"/Provide the parametrized type for this generic.(íı’­úÿÿÿÿ8Î À˜È1
+Q
+java:S37406"/Provide the parametrized type for this generic.(Ú¢éÕùÿÿÿÿ8Î À˜È1
+Q
+java:S37409"/Provide the parametrized type for this generic.(ıÀ³şÿÿÿÿ8Î À˜È1
+Q
+java:S3740<"/Provide the parametrized type for this generic.(ıø–»şÿÿÿÿ8Î À˜È1
+Q
+java:S3740?"/Provide the parametrized type for this generic.(Èâ–úÿÿÿÿ8Î À˜È1
+m
+java:S1192{"PDefine a constant instead of duplicating this literal "Duplicate Entry" 3 times.(Ÿ·ı¥8Ï À˜È1
+v
+java:S1104"ZMake borderItemPane a static final constant or non-public and provide accessors if needed.(ù¶áS8Ğ À˜È1
+p
+java:S1104 "SMake btnSave a static final constant or non-public and provide accessors if needed.(çˆ©Õ8Ğ À˜È1
+r
+java:S1104!"UMake btnUpdate a static final constant or non-public and provide accessors if needed.(§Å‰÷8Ğ À˜È1
+u
+java:S1104""YMake itemTableView a static final constant or non-public and provide accessors if needed.(ğêœ8Ğ À˜È1
+m
+java:S2095¬"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ìû—8ü À˜È1
+j
+java:S2095‰"GUse try-with-resources or close this "Statement" in a "finally" clause.(ôÅ¹Îıÿÿÿÿ8ü À˜È1
+r
+java:S2095Ë"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ê–öşÿÿÿÿ8ü À˜È1
+l
+java:S2095r"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ìû—8ü À˜È1
+
+java:S1130C"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(íâæ–øÿÿÿÿ8ÿ À˜È1
+I
+java:S1602O",Remove useless curly braces around statement(ÿ‰8€¡À˜È1
+T
+java:S1172g"2Remove this unused method parameter "actionEvent".(”µ³—ÿÿÿÿÿ8ƒ¡À˜È1
+b
+java:S2147|"ECombine this catch with the one at line 122, which has the same body.(¼„¦Ã8„¡À˜È1
+O
+java:S1602–",Remove useless curly braces around statement(·öìæşÿÿÿÿ8‡¡À˜È1
+P
+java:S1172À"2Remove this unused method parameter "actionEvent".(°§¾8Š¡À˜È1
+U
+java:S1172Ü"2Remove this unused method parameter "actionEvent".(Íáå‘ùÿÿÿÿ8¡À˜È1
+N
+java:S1128	",Remove this unused import 'dto.CustomerDto'.(ÛàÀÖüÿÿÿÿ8’¡À˜È1
+h
+java:S1128"KRemove this unused import 'javafx.collections.transformation.FilteredList'.(¼¯¦8’¡À˜È1
+f
+java:S1128"IRemove this unused import 'javafx.collections.transformation.SortedList'.( ‡ä¢8’¡À˜È1
