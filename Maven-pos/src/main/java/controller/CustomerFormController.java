@@ -14,9 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import dto.tm.CustomerTm;
+import model.CustomerModel;
+import model.impl.CustomerModelImpl;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.List;
 
 
 public class CustomerFormController {
@@ -56,6 +59,8 @@ public class CustomerFormController {
     @FXML
     private TableColumn colOPtion;
 
+    private CustomerModel customerModel = new CustomerModelImpl();//loose coupling
+
     public void initialize() { //similar to constructor when the form loads
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -71,8 +76,9 @@ public class CustomerFormController {
     }
 
     private void setData(CustomerTm newValue) {
-        if (newValue !=null){
-            tblCustomer.refresh();txtId.setEditable(false); //lock the Id so that it cannot be changed
+        if (newValue != null) {
+            tblCustomer.refresh();
+            txtId.setEditable(false); //lock the Id so that it cannot be changed
             txtId.setText((newValue.getId()));
             txtName.setText(newValue.getName());
             txtAddress.setText(newValue.getAddress());
@@ -82,65 +88,63 @@ public class CustomerFormController {
 
     private void loadCustomerTable() {
         ObservableList<CustomerTm> tmList = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM Customer";
-
         try {
-            Statement stm = DBConnection.getInstance().getConnection().createStatement();
-            ResultSet result = stm.executeQuery(sql); // just reading the data as a set
+            //get a list of customers from the Model
+            List<CustomerDto> dtoList = customerModel.allCustomers();
 
-            while (result.next()) { //change the row pointer
+            for (CustomerDto dto : dtoList) { // for each assign values
                 Button btn = new Button("Delete");
                 CustomerTm c = new CustomerTm(
-                        result.getString(1),
-                        result.getString(2),
-                        result.getString(3),
-                        result.getDouble(4),
+                        dto.getId(),
+                        dto.getName(),
+                        dto.getAddress(),
+                        dto.getSalary(),
                         btn
                 );
                 btn.setOnAction(actionEvent -> { //lamda expression
-                    deleteCustomer(c.getId());
+                    try {
+                        deleteCustomer(c.getId());
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
                 });
-
-
                 tmList.add(c); //arraylist to store all items
             }
-
             tblCustomer.setItems(tmList);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } catch (ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
         }
     }
 
-    private void deleteCustomer(String id) {
-        String sql = "DELETE from customer WHERE id='" + id + "'";
+    private void deleteCustomer(String id) throws SQLException, ClassNotFoundException {
 
-        try {
-            Statement stm = DBConnection.getInstance().getConnection().createStatement();
-            int result = stm.executeUpdate(sql); //executeUpdate changes the database
-            if (result > 0) {
-                new Alert(Alert.AlertType.INFORMATION, "CustomerDto Saved!").show();
-                loadCustomerTable();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+        //-- pass the id to the model method
+        boolean isDeleted = customerModel.deleteCustomer(id);
+        //--- If deleted display confirmations
+        if (isDeleted) {
+            new Alert(Alert.AlertType.INFORMATION, id+" is Deleted!").show();
+            loadCustomerTable();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
         }
     }
 
     public void saveButtonOnAction(javafx.event.ActionEvent actionEvent) {
-        CustomerDto c = new CustomerDto(txtId.getText(),
-                txtName.getText(),
-                txtAddress.getText(),
-                Double.parseDouble(txtSalary.getText())
-        );
-        String sql = "INSERT INTO customer VALUES('" + c.getId() + "','" + c.getName() + "','" + c.getAddress() + "'," + c.getSalary() + ")";
 
         try {
-            Statement stm = DBConnection.getInstance().getConnection().createStatement();
-            int result = stm.executeUpdate(sql); //executeUpdate changes the database
-            if (result > 0) {
-                new Alert(Alert.AlertType.INFORMATION, "CustomerDto Saved!").show();
+            boolean isSaved = customerModel.saveCustomer(new CustomerDto(
+                    txtId.getText(),
+                    txtName.getText(),
+                    txtAddress.getText(),
+                    Double.parseDouble(txtSalary.getText())));
+            if (isSaved) {
+                new Alert(Alert.AlertType.INFORMATION, txtName.getText()+" is Saved!").show();
+                loadCustomerTable();
+                clearFields();
             }
 
         } catch (NullPointerException ex) {
@@ -167,17 +171,14 @@ public class CustomerFormController {
     }
 
     public void updateButtonOnAction(javafx.event.ActionEvent actionEvent) {
-        CustomerDto c = new CustomerDto(txtId.getText(),
-                txtName.getText(),
-                txtAddress.getText(),
-                Double.parseDouble(txtSalary.getText())
-        );
-        String sql = "UPDATE customer SET name='" + c.getName() + "', address='" + c.getAddress() + "', salary=" + c.getSalary() + " WHERE id='" + c.getId() + "'";
 
         try {
-            Statement stm = DBConnection.getInstance().getConnection().createStatement();
-            int result = stm.executeUpdate(sql); //executeUpdate changes the database
-            if (result > 0) {
+            boolean isUpdated = customerModel.updateCustomer(new CustomerDto(
+                    txtId.getText(),
+                    txtName.getText(),
+                    txtAddress.getText(),
+                    Double.parseDouble(txtSalary.getText())));
+            if (isUpdated) {
                 new Alert(Alert.AlertType.INFORMATION, "CustomerDto Updated!").show();
             }
 

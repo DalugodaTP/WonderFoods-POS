@@ -1,45 +1,43 @@
 
+g	java:S112l"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8«Ÿ­È1
+g	java:S112n"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8«Ÿ­È1
+g	java:S112u"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿ8øÏ­­È1
+g	java:S112w"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿ8øÏ­­È1
 Q
-java:S3740-"/Provide the parametrized type for this generic.(ºšãÿıÿÿÿÿ8çùÆşÆ1
+java:S37400"/Provide the parametrized type for this generic.(ºšãÿıÿÿÿÿ8«Ÿ­È1
 L
-java:S37400"/Provide the parametrized type for this generic.(Œà•®8çùÆşÆ1
+java:S37403"/Provide the parametrized type for this generic.(Œà•®8«Ÿ­È1
 L
-java:S37403"/Provide the parametrized type for this generic.(´°æ¸8çùÆşÆ1
+java:S37406"/Provide the parametrized type for this generic.(´°æ¸8«Ÿ­È1
 Q
-java:S37406"/Provide the parametrized type for this generic.(ù‚©·üÿÿÿÿ8çùÆşÆ1
+java:S37409"/Provide the parametrized type for this generic.(ù‚©·üÿÿÿÿ8«Ÿ­È1
 Q
-java:S37409"/Provide the parametrized type for this generic.(ä£ØÀüÿÿÿÿ8èùÆşÆ1
+java:S3740<"/Provide the parametrized type for this generic.(ä£ØÀüÿÿÿÿ8«Ÿ­È1
 n
-java:S1192“"PDefine a constant instead of duplicating this literal "Duplicate Entry" 4 times.(Ÿ·ı¥8éùÆşÆ1
+java:S1192—"PDefine a constant instead of duplicating this literal "Duplicate Entry" 4 times.(Ÿ·ı¥8¬Ÿ­È1
 u
-java:S1104"SMake btnSave a static final constant or non-public and provide accessors if needed.(Æ ‡’úÿÿÿÿ8êùÆşÆ1
+java:S1104"SMake btnSave a static final constant or non-public and provide accessors if needed.(Æ ‡’úÿÿÿÿ8¬Ÿ­È1
 r
-java:S1104"UMake btnReload a static final constant or non-public and provide accessors if needed.(‘•õû8êùÆşÆ1
+java:S1104"UMake btnReload a static final constant or non-public and provide accessors if needed.(‘•õû8¬Ÿ­È1
 w
-java:S1104"UMake btnUpdate a static final constant or non-public and provide accessors if needed.(”ƒ³Šÿÿÿÿÿ8êùÆşÆ1
+java:S1104"UMake btnUpdate a static final constant or non-public and provide accessors if needed.(”ƒ³Šÿÿÿÿÿ8¬Ÿ­È1
 z
-java:S1104"XMake customerPane a static final constant or non-public and provide accessors if needed.(šÿß­úÿÿÿÿ8êùÆşÆ1
-j
-java:S2095²"GUse try-with-resources or close this "Statement" in a "finally" clause.(ôÅ¹Îıÿÿÿÿ8ÂãàşÆ1
-i
-java:S2095X"GUse try-with-resources or close this "Statement" in a "finally" clause.(ôÅ¹Îıÿÿÿÿ8¸ˆàşÆ1
-j
-java:S2095Œ"GUse try-with-resources or close this "Statement" in a "finally" clause.(ôÅ¹Îıÿÿÿÿ8–‰¾±Ç1
-i
-java:S2095v"GUse try-with-resources or close this "Statement" in a "finally" clause.(ôÅ¹Îıÿÿÿÿ8–‰¾±Ç1
+java:S1104"XMake customerPane a static final constant or non-public and provide accessors if needed.(šÿß­úÿÿÿÿ8¬Ÿ­È1
 I
-java:S1602C",Remove useless curly braces around statement(ŠĞå™8ËúÆşÆ1
-N
-java:S1602d",Remove useless curly braces around statement(·öìæşÿÿÿÿ8ÔúÆşÆ1
+java:S1602H",Remove useless curly braces around statement(ŠĞå™8ÌŸ­È1
+b
+java:S2147v"ECombine this catch with the one at line 116, which has the same body.(Ö¨š•8ÎŸ­È1
+b
+java:S2147m"ECombine this catch with the one at line 107, which has the same body.(ıàÑÎ8–Ğ­­È1
 O
-java:S1172ƒ"2Remove this unused method parameter "actionEvent".(ôÍf8ÜúÆşÆ1
+java:S1172ˆ"2Remove this unused method parameter "actionEvent".(ôÍf8ÒŸ­È1
 c
-java:S2147”"ECombine this catch with the one at line 146, which has the same body.(¼„¦Ã8ßúÆşÆ1
+java:S2147˜"ECombine this catch with the one at line 150, which has the same body.(¼„¦Ã8ÒŸ­È1
 P
-java:S1172¥"2Remove this unused method parameter "actionEvent".(‚ğÆØ8ãúÆşÆ1
+java:S1172©"2Remove this unused method parameter "actionEvent".(‚ğÆØ8ÔŸ­È1
 P
-java:S1172©"2Remove this unused method parameter "actionEvent".(ˆˆ® 8åúÆşÆ1
+java:S1172­"2Remove this unused method parameter "actionEvent".(ˆˆ® 8ÕŸ­È1
 c
-java:S2147º"ECombine this catch with the one at line 184, which has the same body.(¼„¦Ã8èúÆşÆ1
+java:S2147»"ECombine this catch with the one at line 185, which has the same body.(¼„¦Ã8ÕŸ­È1
 U
-java:S1172Ã"2Remove this unused method parameter "actionEvent".(Íáå‘ùÿÿÿÿ8ìúÆşÆ1
+java:S1172Ä"2Remove this unused method parameter "actionEvent".(Íáå‘ùÿÿÿÿ8×Ÿ­È1
