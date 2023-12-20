@@ -2,6 +2,7 @@ package dto.tm;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.scene.control.Button;
 import lombok.*;
 
 @AllArgsConstructor
@@ -15,7 +16,7 @@ public class ItemTm extends RecursiveTreeObject<ItemTm> {
     private String desc;
     private double unitPrice;
     private int qty;
-    private JFXButton btn;
+    private Button btn;
 
     public ItemTm(String code, String desc, double unitPrice, int qty) {
         this.code = code;

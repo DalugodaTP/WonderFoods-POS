@@ -58,3 +58,7 @@ _
 /src/main/java/model/impl/CustomerModelImpl.java,0\b\0be0bbe10c6e48eb8c96dc0e7ed2f0d10bff1b49
 T
 $src/main/java/dto/tm/CustomerTm.java,2\a\2a0edce3160840b5e1dff3a221d2fba22c0b3f67
+R
+"src/main/java/model/ItemModel.java,6\4\64e26bb1992ad0f7e3462ed7202d9066fa6e9fb5
+[
++src/main/java/model/impl/ItemModelImpl.java,4\3\4393c95c32ff3e9f6f528a5ea2ebf429a4188d58
