@@ -32,7 +32,8 @@
                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="567.0" minHeight="10.0" prefHeight="450.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="241.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="12.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
