@@ -5,6 +5,8 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 import dto.CustomerDto;
 import dto.ItemDto;
+import dto.OrderDetailsDto;
+import dto.OrderDto;
 import dto.tm.ItemTm;
 import dto.tm.OrderTm;
 import javafx.collections.FXCollections;
@@ -12,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -20,11 +23,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CustomerModel;
 import model.ItemModel;
+import model.OrderModel;
 import model.impl.CustomerModelImpl;
 import model.impl.ItemModelImpl;
+import model.impl.OrderModelImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +51,7 @@ public class PlaceOrderFormController {
     public TreeTableColumn colAmount;
     public TreeTableColumn colOption;
     public Label lblTotal;
+    public Label lblOrderId;
 
     //--Store within an array without connecting to the database each time
     private List<CustomerDto> customers = new ArrayList();
@@ -53,6 +61,7 @@ public class PlaceOrderFormController {
     //--create objects for customer and items
     private CustomerModel customerModel = new CustomerModelImpl();
     private ItemModel itemModel = new ItemModelImpl();
+    private OrderModel orderModel = new OrderModelImpl();
 
     //--Add to the table
     private ObservableList<OrderTm> tmList = FXCollections.observableArrayList();
@@ -65,6 +74,7 @@ public class PlaceOrderFormController {
         colAmount.setCellValueFactory(new TreeItemPropertyValueFactory<>("qty"));
         colOption.setCellValueFactory(new TreeItemPropertyValueFactory<>("btn"));
 
+        generateId();
         loadCustomerId();
         loadItemCodes();
 
@@ -142,34 +152,37 @@ public class PlaceOrderFormController {
                     btn
             );
 
+            //--Remove the entry when button is pressed
             btn.setOnAction(actionEvent1 -> {
                 tmList.remove(tm);
+                //--update the total and table
                 tot -= tm.getAmount();
                 tblOrder.refresh();
-                lblTotal.setText(String.format("%.2f",tot));
+                lblTotal.setText(String.format("%.2f", tot));
             });
 
             boolean isExist = false;
 
-            for (OrderTm order:tmList) {
-                if (order.getCode().equals(tm.getCode())){
-                    order.setQty(order.getQty()+tm.getQty());
-                    order.setAmount(order.getAmount()+tm.getAmount());
+            for (OrderTm order : tmList) {
+                if (order.getCode().equals(tm.getCode())) {
+                    order.setQty(order.getQty() + tm.getQty());
+                    order.setAmount(order.getAmount() + tm.getAmount());
                     isExist = true;
-                    tot+=tm.getAmount();
+                    tot += tm.getAmount();
                 }
             }
 
-            if (!isExist){
+            if (!isExist) {
                 tmList.add(tm);
-                tot+= tm.getAmount();
+                tot += tm.getAmount();
             }
 
             TreeItem<OrderTm> treeObject = new RecursiveTreeItem<OrderTm>(tmList, RecursiveTreeObject::getChildren);
             tblOrder.setRoot(treeObject);
             tblOrder.setShowRoot(false);
-
-            lblTotal.setText(String.format("%.2f",tot));
+            //--update the total amount
+            lblTotal.setText(String.format("%.2f", tot));
+            txtQty.setText("");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -177,6 +190,57 @@ public class PlaceOrderFormController {
         }
     }
 
-    public void placeOrderButtonOnAction(ActionEvent actionEvent) {
+
+    public String generateId() {
+        try {
+            OrderDto dto = orderModel.lastOrder();
+            if (dto != null) {
+                String id = dto.getOrderId();
+                int num = Integer.parseInt(id.split("[D]")[1]);
+                num++;
+                lblOrderId.setText(String.format("D%03d", num));
+            } else {
+                lblOrderId.setText("D001");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    public void placeOrderButtonOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        List<OrderDetailsDto> list = new ArrayList<>();
+        for (OrderTm tm : tmList) {
+            list.add(new OrderDetailsDto(
+                    lblOrderId.getText(),
+                    tm.getCode(),
+                    tm.getQty(),
+                    tm.getAmount() / tm.getQty()
+            ));
+        }
+
+        //      if (!tmList.isEmpty()){
+        boolean isSaved = false;
+        try {
+            isSaved = orderModel.saveOrder(new OrderDto(
+                    lblOrderId.getText(),
+                    LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd")),
+                    cmbCustId.getValue().toString(),
+                    list
+            ));
+
+            if (isSaved) {
+                new Alert(Alert.AlertType.INFORMATION, "Order Saved !!").show();
+            }else{
+                new Alert(Alert.AlertType.ERROR, "Something went wrong !!").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        //      }
     }
 }

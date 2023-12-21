@@ -62,5 +62,6 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
+      <Label fx:id="lblOrderId" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" layoutX="845.0" layoutY="45.0" prefHeight="21.0" prefWidth="104.0" />
     </children>
 </AnchorPane>
