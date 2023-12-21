@@ -33,6 +33,15 @@ public class ItemListFormController {
     public JFXButton btnSave;
     public JFXButton btnUpdate;
     public JFXTreeTableView<ItemTm> itemTableView;
+//    public TreeTableColumn colOrderItemCode;
+//    public TreeTableColumn colOrderDesc;
+//    public TreeTableColumn colOrderQty;
+//    public TreeTableColumn colOrderUnitPrice;
+//    public TreeTableColumn colOrderDate;
+//    public TreeTableColumn colOrderDiscount;
+//    public TreeTableColumn colOrderType;
+//    public TreeTableColumn colOrderSize;
+//    public TreeTableColumn colOrderAmount;
     @FXML
     private JFXTextField txtCode;
 
@@ -76,18 +85,19 @@ public class ItemListFormController {
         //--Initialize table loading
         loadItemTable();
 
-        //------Adding selection event to the table
+        //--Adding selection event to the table
         itemTableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             setData(newValue);
         });
 
-        //---Search Table
-        txtSearch.textProperty().addListener((observableValue, oldValue, newValue) -> itemTableView.setPredicate(itemTmTreeItem -> {
-            String code = itemTmTreeItem.getValue().getCode().toLowerCase();
-            String desc = itemTmTreeItem.getValue().getDesc().toLowerCase();
+        //--Search Table (JFoenix version)
+        txtSearch.textProperty().addListener((observableValue, oldValue, newValue) ->
+                itemTableView.setPredicate(itemTmTreeItem -> {
+                    String code = itemTmTreeItem.getValue().getCode().toLowerCase();
+                    String desc = itemTmTreeItem.getValue().getDesc().toLowerCase();
 
-            return code.contains(newValue.toLowerCase()) || desc.contains(newValue.toLowerCase());
-        }));
+                    return code.contains(newValue.toLowerCase()) || desc.contains(newValue.toLowerCase());
+                }));
 
     }
 
