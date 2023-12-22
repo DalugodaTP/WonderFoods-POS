@@ -2,12 +2,10 @@ package controller;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import dto.CustomerDto;
 import dto.ItemDto;
 import dto.OrderDetailsDto;
 import dto.OrderDto;
-import dto.tm.ItemTm;
 import dto.tm.OrderTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,12 +19,12 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.ItemModel;
-import model.OrderModel;
-import model.impl.CustomerModelImpl;
-import model.impl.ItemModelImpl;
-import model.impl.OrderModelImpl;
+import dao.custom.CustomerDao;
+import dao.custom.ItemDao;
+import dao.custom.OrderDao;
+import dao.custom.impl.CustomerDaoImpl;
+import dao.custom.impl.ItemDaoImpl;
+import dao.custom.impl.OrderDaoImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -59,9 +57,9 @@ public class PlaceOrderFormController {
     private double tot = 0;
 
     //--create objects for customer and items
-    private CustomerModel customerModel = new CustomerModelImpl();
-    private ItemModel itemModel = new ItemModelImpl();
-    private OrderModel orderModel = new OrderModelImpl();
+    private CustomerDao customerDao = new CustomerDaoImpl();
+    private ItemDao itemDao = new ItemDaoImpl();
+    private OrderDao orderDao = new OrderDaoImpl();
 
     //--Add to the table
     private ObservableList<OrderTm> tmList = FXCollections.observableArrayList();
@@ -71,7 +69,7 @@ public class PlaceOrderFormController {
         colCode.setCellValueFactory(new TreeItemPropertyValueFactory<>("code"));
         colDEsc.setCellValueFactory(new TreeItemPropertyValueFactory<>("desc"));
         colQty.setCellValueFactory(new TreeItemPropertyValueFactory<>("qty"));
-        colAmount.setCellValueFactory(new TreeItemPropertyValueFactory<>("qty"));
+        colAmount.setCellValueFactory(new TreeItemPropertyValueFactory<>("amount"));
         colOption.setCellValueFactory(new TreeItemPropertyValueFactory<>("btn"));
 
         generateId();
@@ -99,7 +97,7 @@ public class PlaceOrderFormController {
 
     private void loadItemCodes() {
         try {
-            items = itemModel.allItems();
+            items = itemDao.allItems();
             ObservableList list = FXCollections.observableArrayList();
             for (ItemDto dto : items) {
                 list.add(dto.getCode());
@@ -113,18 +111,13 @@ public class PlaceOrderFormController {
     }
 
     private void loadCustomerId() {
-        try {
-            customers = customerModel.allCustomers();
+            //customers = customerDto.allCustomers();
             ObservableList list = FXCollections.observableArrayList();
             for (CustomerDto dto : customers) {
                 list.add(dto.getId());
             }
             cmbCustId.setItems((ObservableList) list);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     public void backButtonOnAction(ActionEvent actionEvent) {
@@ -141,9 +134,13 @@ public class PlaceOrderFormController {
 
     public void addToCartButtonOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         try {
-            double amount = itemModel.getItem(cmbItemCode.getValue().toString()).getUnitPrice() * Integer.parseInt(txtQty.getText());
+            //--calculate the Amount using the values in the text fields
+            double amount = itemDao.getItem(cmbItemCode.getValue().toString()).getUnitPrice() * Integer.parseInt(txtQty.getText());
+
+            //--create a button to be added into the table model
             JFXButton btn = new JFXButton("Delete");
 
+            //--capture the values from the fields to be added into the table
             OrderTm tm = new OrderTm(
                     cmbItemCode.getValue().toString(),
                     txtDesc.getText(),
@@ -152,7 +149,7 @@ public class PlaceOrderFormController {
                     btn
             );
 
-            //--Remove the entry when button is pressed
+            //--Delete action button to remove the entry when button is pressed
             btn.setOnAction(actionEvent1 -> {
                 tmList.remove(tm);
                 //--update the total and table
@@ -163,23 +160,29 @@ public class PlaceOrderFormController {
 
             boolean isExist = false;
 
+            //--for-each for the observableArrayList to avoid adding a new entry if the entry already exists
+            //within the table view
             for (OrderTm order : tmList) {
+                //--check the code of entry that is equal to the captured code
                 if (order.getCode().equals(tm.getCode())) {
                     order.setQty(order.getQty() + tm.getQty());
                     order.setAmount(order.getAmount() + tm.getAmount());
-                    isExist = true;
+                    isExist = true; //to avoid adding freshly
                     tot += tm.getAmount();
                 }
             }
 
+            //--if an entry is unavailable, add the entry freshly into observableArrayList
             if (!isExist) {
                 tmList.add(tm);
                 tot += tm.getAmount();
             }
 
+            //add the observableArrayList into the table view
             TreeItem<OrderTm> treeObject = new RecursiveTreeItem<OrderTm>(tmList, RecursiveTreeObject::getChildren);
             tblOrder.setRoot(treeObject);
             tblOrder.setShowRoot(false);
+
             //--update the total amount
             lblTotal.setText(String.format("%.2f", tot));
             txtQty.setText("");
@@ -193,7 +196,7 @@ public class PlaceOrderFormController {
 
     public String generateId() {
         try {
-            OrderDto dto = orderModel.lastOrder();
+            OrderDto dto = orderDao.lastOrder();
             if (dto != null) {
                 String id = dto.getOrderId();
                 int num = Integer.parseInt(id.split("[D]")[1]);
@@ -212,6 +215,8 @@ public class PlaceOrderFormController {
 
     public void placeOrderButtonOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         List<OrderDetailsDto> list = new ArrayList<>();
+
+        //--add the items inside the observableArrayList into the
         for (OrderTm tm : tmList) {
             list.add(new OrderDetailsDto(
                     lblOrderId.getText(),
@@ -221,10 +226,11 @@ public class PlaceOrderFormController {
             ));
         }
 
-        //      if (!tmList.isEmpty()){
+        //-- To confirm if the entry was added into the dabatabase
         boolean isSaved = false;
         try {
-            isSaved = orderModel.saveOrder(new OrderDto(
+            //--capture the return from the save method of the implementation
+            isSaved = orderDao.saveOrder(new OrderDto(
                     lblOrderId.getText(),
                     LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd")),
                     cmbCustId.getValue().toString(),
@@ -241,6 +247,6 @@ public class PlaceOrderFormController {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        //      }
+
     }
 }

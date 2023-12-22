@@ -23,12 +23,14 @@ import java.util.Date;
 public class DashboardFormController {
 
     public Button btnCustomer;
+
     public AnchorPane pane;
     public Button btnItemList;
     public Button btnPlaceOrder;
     public Label lblTime;
     public Label lblDate;
     public Button btnClose;
+    public Button btnOrders;
 
     private volatile boolean stop =false;
 
@@ -64,7 +66,7 @@ public class DashboardFormController {
     public void customerButtonOnAction(ActionEvent actionEvent) {
         Stage stage = (Stage) pane.getScene().getWindow();
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerForm.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CustomerForm.fxml"))));
             stage.setTitle("CustomerDto Form");
             stage.centerOnScreen();
             stage.show();
@@ -99,5 +101,17 @@ public class DashboardFormController {
 
     public void closeButtonOnAction(ActionEvent actionEvent) {
         javafx.application.Platform.exit();
+    }
+
+    public void ordersButtonOnAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) pane.getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/Orders.fxml"))));
+            stage.setTitle("Orders");
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -5,7 +5,6 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import db.DBConnection;
 import dto.ItemDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,8 +20,8 @@ import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import dto.tm.ItemTm;
-import model.ItemModel;
-import model.impl.ItemModelImpl;
+import dao.custom.ItemDao;
+import dao.custom.impl.ItemDaoImpl;
 
 import java.io.IOException;
 import java.sql.*;
@@ -72,7 +71,7 @@ public class ItemListFormController {
     @FXML
     private TreeTableColumn colOption;
 
-    private ItemModel itemModel = new ItemModelImpl();//loose coupling
+    private ItemDao itemDao = new ItemDaoImpl();//loose coupling
 
     public void initialize() throws SQLException, ClassNotFoundException {
         //------Declare columns and mapping the ItemTm with the columns
@@ -118,7 +117,7 @@ public class ItemListFormController {
                 Double.parseDouble(txtUnitPrice.getText()),
                 Integer.parseInt(txtQty.getText())
         );
-        boolean isSaved = itemModel.saveItem(dto);
+        boolean isSaved = itemDao.saveItem(dto);
         try {
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION, "Item Saved!").show();
@@ -142,7 +141,7 @@ public class ItemListFormController {
 
         try {
             //-- get the list of items from the Model
-            List<ItemDto> dtoList = itemModel.allItems();
+            List<ItemDto> dtoList = itemDao.allItems();
 
             for (ItemDto dto : dtoList) { // add a button to each item
                 Button btn = new Button("Delete");
@@ -175,7 +174,7 @@ public class ItemListFormController {
 
     private void deleteItem(String code) throws SQLException, ClassNotFoundException {
 
-        boolean isDelete = itemModel.deleteItem(code);
+        boolean isDelete = itemDao.deleteItem(code);
         try {
             if (isDelete) {
                 loadItemTable();
@@ -204,7 +203,7 @@ public class ItemListFormController {
         );
 
         try {
-            boolean isUpdate = itemModel.updateItem(c);
+            boolean isUpdate = itemDao.updateItem(c);
             if (isUpdate) {
                 new Alert(Alert.AlertType.INFORMATION, "Item Updated!").show();
             }

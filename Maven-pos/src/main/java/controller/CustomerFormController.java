@@ -1,7 +1,10 @@
 package controller;
 
 
-import db.DBConnection;
+import bo.BoFactory;
+import bo.custom.CustomerBo;
+import bo.custom.impl.CustomerBoImpl;
+import dao.util.BoType;
 import dto.CustomerDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,8 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import dto.tm.CustomerTm;
-import model.CustomerModel;
-import model.impl.CustomerModelImpl;
 
 import java.io.IOException;
 import java.sql.*;
@@ -59,7 +60,8 @@ public class CustomerFormController {
     @FXML
     private TableColumn colOPtion;
 
-    private CustomerModel customerModel = new CustomerModelImpl();//loose coupling
+    //private CustomerBo customerBo = new CustomerBoImpl();
+    private final CustomerBo customerBo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
 
     public void initialize() { //similar to constructor when the form loads
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -85,12 +87,11 @@ public class CustomerFormController {
             txtSalary.setText(String.valueOf(newValue.getSalary()));
         }
     }
-
     private void loadCustomerTable() {
         ObservableList<CustomerTm> tmList = FXCollections.observableArrayList();
         try {
             //get a list of customers from the Model
-            List<CustomerDto> dtoList = customerModel.allCustomers();
+            List<CustomerDto> dtoList = customerBo.allCustomers();
 
             for (CustomerDto dto : dtoList) { // for each assign values
                 Button btn = new Button("Delete");
@@ -123,7 +124,7 @@ public class CustomerFormController {
     private void deleteCustomer(String id) throws SQLException, ClassNotFoundException {
 
         //-- pass the id to the model method
-        boolean isDeleted = customerModel.deleteCustomer(id);
+        boolean isDeleted = customerBo.deleteCustomer(id);
         //--- If deleted display confirmations
         if (isDeleted) {
             new Alert(Alert.AlertType.INFORMATION, id+" is Deleted!").show();
@@ -136,7 +137,7 @@ public class CustomerFormController {
     public void saveButtonOnAction(javafx.event.ActionEvent actionEvent) {
 
         try {
-            boolean isSaved = customerModel.saveCustomer(new CustomerDto(
+            boolean isSaved = customerBo.saveCustomer(new CustomerDto(
                     txtId.getText(),
                     txtName.getText(),
                     txtAddress.getText(),
@@ -170,27 +171,25 @@ public class CustomerFormController {
         tblCustomer.refresh(); //reduces the time to load (use a static variable to store data)
     }
 
-    public void updateButtonOnAction(javafx.event.ActionEvent actionEvent) {
+    @FXML
+    void updateButtonOnAction(ActionEvent event) {
+        CustomerDto dto = new CustomerDto(txtId.getText(),
+                txtName.getText(),
+                txtAddress.getText(),
+                Double.parseDouble(txtSalary.getText())
+        );
 
         try {
-            boolean isUpdated = customerModel.updateCustomer(new CustomerDto(
-                    txtId.getText(),
-                    txtName.getText(),
-                    txtAddress.getText(),
-                    Double.parseDouble(txtSalary.getText())));
-            if (isUpdated) {
-                new Alert(Alert.AlertType.INFORMATION, "CustomerDto Updated!").show();
+            boolean isUpdated = customerBo.updateCustomer(dto);
+            if (isUpdated){
+                new Alert(Alert.AlertType.INFORMATION,"Customer "+dto.getId()+" Updated!").show();
+                loadCustomerTable();
+                clearFields();
             }
 
-        } catch (NullPointerException ex) {
-            new Alert(Alert.AlertType.ERROR, "Duplicate Entry").show();
-        } catch (SQLIntegrityConstraintViolationException ex) {
-            new Alert(Alert.AlertType.ERROR, "Duplicate Entry").show();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-        loadCustomerTable();
-        clearFields();
     }
 
     public void backButtonOnAction(ActionEvent actionEvent) {

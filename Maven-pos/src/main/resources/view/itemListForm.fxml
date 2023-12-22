@@ -15,82 +15,97 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderItemPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="681.0" prefWidth="1142.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ItemListFormController">
+<BorderPane fx:id="borderItemPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="681.0" prefWidth="1142.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ItemListFormController">
     <center>
         <GridPane BorderPane.alignment="CENTER">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="10.0" prefWidth="44.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1066.0" minWidth="100.0" prefWidth="1066.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="32.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="10.0" prefWidth="44.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1066.0" minWidth="100.0" prefWidth="1066.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="32.0"/>
             </columnConstraints>
             <rowConstraints>
-            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="567.0" minHeight="10.0" prefHeight="344.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="171.0" minHeight="4.0" prefHeight="4.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="171.0" minHeight="7.0" prefHeight="35.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="567.0" minHeight="10.0" prefHeight="344.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="171.0" minHeight="4.0" prefHeight="4.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="171.0" minHeight="7.0" prefHeight="35.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
                 <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Label prefHeight="21.0" prefWidth="342.0" text="item code" />
-                        <Label prefHeight="21.0" prefWidth="342.0" text="Description" GridPane.columnIndex="2" />
-                        <JFXTextField fx:id="txtCode" GridPane.rowIndex="1" />
-                        <JFXTextField fx:id="txtDesc" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Label prefHeight="21.0" prefWidth="342.0" text="Unit Price" GridPane.columnIndex="4" />
-                        <JFXTextField fx:id="txtUnitPrice" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                        <Label prefHeight="21.0" prefWidth="342.0" text="Qty" GridPane.columnIndex="6" />
-                        <JFXTextField fx:id="txtQty" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                        <Label prefHeight="21.0" prefWidth="342.0" text="item code"/>
+                        <Label prefHeight="21.0" prefWidth="342.0" text="Description" GridPane.columnIndex="2"/>
+                        <JFXTextField fx:id="txtCode" GridPane.rowIndex="1"/>
+                        <JFXTextField fx:id="txtDesc" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                        <Label prefHeight="21.0" prefWidth="342.0" text="Unit Price" GridPane.columnIndex="4"/>
+                        <JFXTextField fx:id="txtUnitPrice" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+                        <Label prefHeight="21.0" prefWidth="342.0" text="Qty" GridPane.columnIndex="6"/>
+                        <JFXTextField fx:id="txtQty" GridPane.columnIndex="6" GridPane.rowIndex="1"/>
                     </children>
                 </GridPane>
-                <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" prefHeight="31.0" prefWidth="229.0" promptText="Search" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                <JFXTreeTableView fx:id="itemTableView" prefHeight="411.0" prefWidth="1066.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                <JFXTextField fx:id="txtSearch" maxWidth="-Infinity" prefHeight="31.0" prefWidth="229.0"
+                              promptText="Search" GridPane.columnIndex="1" GridPane.halignment="LEFT"
+                              GridPane.rowIndex="4" GridPane.valignment="CENTER"/>
+                <JFXTreeTableView fx:id="itemTableView" prefHeight="411.0" prefWidth="1066.0" GridPane.columnIndex="1"
+                                  GridPane.rowIndex="6">
                     <columns>
-                        <TreeTableColumn fx:id="colCode" maxWidth="1.7976931348623157E308" prefWidth="131.00003051757812" text="item Code" />
-                        <TreeTableColumn fx:id="colDesc" maxWidth="1.7976931348623157E308" prefWidth="418.0" text="Description" />
-                        <TreeTableColumn fx:id="colUnitPrice" maxWidth="1.7976931348623157E308" minWidth="5.0" prefWidth="102.0" text="Unit Price" />
-                        <TreeTableColumn fx:id="colQty" maxWidth="1.7976931348623157E308" prefWidth="146.0" text="QTY on Hand" />
-                        <TreeTableColumn fx:id="colOption" maxWidth="1.7976931348623157E308" prefWidth="144.0" text="Option" />
+                        <TreeTableColumn fx:id="colCode" maxWidth="1.7976931348623157E308"
+                                         prefWidth="131.00003051757812" text="item Code"/>
+                        <TreeTableColumn fx:id="colDesc" maxWidth="1.7976931348623157E308" prefWidth="418.0"
+                                         text="Description"/>
+                        <TreeTableColumn fx:id="colUnitPrice" maxWidth="1.7976931348623157E308" minWidth="5.0"
+                                         prefWidth="102.0" text="Unit Price"/>
+                        <TreeTableColumn fx:id="colQty" maxWidth="1.7976931348623157E308" prefWidth="146.0"
+                                         text="QTY on Hand"/>
+                        <TreeTableColumn fx:id="colOption" maxWidth="1.7976931348623157E308" prefWidth="144.0"
+                                         text="Option"/>
                     </columns>
                 </JFXTreeTableView>
-                <Button mnemonicParsing="false" onAction="#backButtonOnAction" prefHeight="31.0" prefWidth="100.0" GridPane.rowIndex="1">
+                <Button mnemonicParsing="false" onAction="#backButtonOnAction" prefHeight="31.0" prefWidth="100.0"
+                        GridPane.rowIndex="1">
                     <graphic>
                         <ImageView fitHeight="26.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@back-button.png" />
+                                <Image url="@back-button.png"/>
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
-                <JFXButton fx:id="btnSave" onAction="#saveButtonOnAction" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: #2ecc71;" text="Save" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                <JFXButton fx:id="btnSave" onAction="#saveButtonOnAction" prefHeight="31.0" prefWidth="80.0"
+                           style="-fx-background-color: #2ecc71;" text="Save" textFill="WHITE" GridPane.columnIndex="1"
+                           GridPane.halignment="RIGHT" GridPane.rowIndex="8">
                     <font>
-                        <Font name="System Bold" size="15.0" />
+                        <Font name="System Bold" size="15.0"/>
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="btnUpdate" onAction="#updateButtonOnAction" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: #3498db;" text="Update" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                <JFXButton fx:id="btnUpdate" onAction="#updateButtonOnAction" prefHeight="31.0" prefWidth="94.0"
+                           style="-fx-background-color: #3498db;" text="Update" textFill="WHITE"
+                           GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
                     <font>
-                        <Font name="System Bold" size="15.0" />
+                        <Font name="System Bold" size="15.0"/>
                     </font>
                     <GridPane.margin>
-                        <Insets right="120.0" />
+                        <Insets right="120.0"/>
                     </GridPane.margin>
                 </JFXButton>
             </children>

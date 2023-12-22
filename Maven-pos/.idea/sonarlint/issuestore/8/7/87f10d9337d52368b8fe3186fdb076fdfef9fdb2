@@ -1,0 +1,10 @@
+
+P
+java:S1121".Extract the assignment out of this expression.(Ó­Í™øÿÿÿÿ8â”Ü“É1
+h
+java:S1301"KReplace this "switch" statement by "if" statements to increase readability.(ÜŸ•8°ÛÜ“É1
+]	java:S125"<This block of commented-out lines of code should be removed.(£ÂÍêÿÿÿÿÿ8µÛÜ“É1
+»
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(§İüáşÿÿÿÿ8ç”Ü“É1
+u	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(ÜŸ•8ê”Ü“É1
+]	java:S125"<This block of commented-out lines of code should be removed.(¿ö‚ïıÿÿÿÿ8ºÛÜ“É1

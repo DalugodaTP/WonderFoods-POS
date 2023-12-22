@@ -1,20 +1,17 @@
-package dto;
+package entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class OrderDto {
+public class OrderDetails {
     private String orderId;
-    private String date;
-    private String custId;
-    //store details of all the Orders
-    private List<OrderDetailsDto> list;
+    private String itemCode;
+    private int qty;
+    private double unitPrice;
 }

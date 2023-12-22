@@ -34,7 +34,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="332.0" layoutY="163.0" prefHeight="21.0" prefWidth="79.0" text="Calculator" textAlignment="CENTER" wrapText="true">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="332.0" layoutY="163.0" prefHeight="21.0" prefWidth="79.0" text="Orders" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -67,6 +67,11 @@
          </image>
       </ImageView>
       <Button fx:id="btnClose" layoutX="421.0" layoutY="157.0" mnemonicParsing="false" onAction="#closeButtonOnAction" opacity="0.0" prefHeight="124.0" prefWidth="84.0" style="-fx-cursor: hand;" text="close">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnOrders" layoutX="331.0" layoutY="158.0" mnemonicParsing="false" onAction="#ordersButtonOnAction" opacity="0.0" prefHeight="124.0" prefWidth="79.0" style="-fx-cursor: hand;" text="Item List">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
