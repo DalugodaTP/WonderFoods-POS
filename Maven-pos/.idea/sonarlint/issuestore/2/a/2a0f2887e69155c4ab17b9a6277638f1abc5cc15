@@ -1,3 +1,9 @@
 
+j
+java:S2259&"HA "NullPointerException" could be thrown; "connection" is nullable here.(ëñÖùÿÿÿÿ8ãÏ‘›É1
+e
+java:S2259)"HA "NullPointerException" could be thrown; "connection" is nullable here.(•Üş8ãÏ‘›É1
+l
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ĞÿŸÓ8ãÏ‘›É1
 l
 java:S20950"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ìû—8˜´ĞÃÈ1

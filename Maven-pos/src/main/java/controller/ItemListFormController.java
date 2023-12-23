@@ -1,5 +1,7 @@
 package controller;
 
+import bo.custom.ItemBo;
+import bo.custom.impl.ItemBoImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -20,7 +22,6 @@ import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import dto.tm.ItemTm;
-import dao.custom.ItemDao;
 import dao.custom.impl.ItemDaoImpl;
 
 import java.io.IOException;
@@ -71,7 +72,7 @@ public class ItemListFormController {
     @FXML
     private TreeTableColumn colOption;
 
-    private ItemDao itemDao = new ItemDaoImpl();//loose coupling
+    private ItemBo itemBo = new ItemBoImpl();//loose coupling
 
     public void initialize() throws SQLException, ClassNotFoundException {
         //------Declare columns and mapping the ItemTm with the columns
@@ -117,7 +118,8 @@ public class ItemListFormController {
                 Double.parseDouble(txtUnitPrice.getText()),
                 Integer.parseInt(txtQty.getText())
         );
-        boolean isSaved = itemDao.saveItem(dto);
+        boolean isSaved = itemBo.saveItem(dto);
+        //--Check if the item is saved
         try {
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION, "Item Saved!").show();
@@ -141,7 +143,7 @@ public class ItemListFormController {
 
         try {
             //-- get the list of items from the Model
-            List<ItemDto> dtoList = itemDao.allItems();
+            List<ItemDto> dtoList = itemBo.allItems();
 
             for (ItemDto dto : dtoList) { // add a button to each item
                 Button btn = new Button("Delete");
@@ -174,7 +176,7 @@ public class ItemListFormController {
 
     private void deleteItem(String code) throws SQLException, ClassNotFoundException {
 
-        boolean isDelete = itemDao.deleteItem(code);
+        boolean isDelete = itemBo.deleteItem(code);
         try {
             if (isDelete) {
                 loadItemTable();
@@ -203,7 +205,7 @@ public class ItemListFormController {
         );
 
         try {
-            boolean isUpdate = itemDao.updateItem(c);
+            boolean isUpdate = itemBo.updateItem(c);
             if (isUpdate) {
                 new Alert(Alert.AlertType.INFORMATION, "Item Updated!").show();
             }

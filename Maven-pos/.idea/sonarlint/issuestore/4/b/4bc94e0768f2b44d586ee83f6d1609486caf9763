@@ -1,0 +1,11 @@
+
+X	java:S125"<This block of commented-out lines of code should be removed.(ÒàÕó8ÊÒ¿˜É1
+N
+java:S1128",Remove this unused import 'dto.CustomerDto'.(ÛàÀÖüÿÿÿÿ8¨·›šÉ1
+I
+java:S1128",Remove this unused import 'entity.Customer'.(éş²¢8ˆ¹è™É1
+O
+java:S1128	"2Remove this unused import 'java.sql.SQLException'.(ÛïÆŸ8ø ç™É1
+M
+java:S1128
+"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ø ç™É1

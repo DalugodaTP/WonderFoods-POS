@@ -1,8 +1,10 @@
 package dao.custom.impl;
 
+import dao.CrudDao;
 import db.DBConnection;
 import dto.ItemDto;
 import dao.custom.ItemDao;
+import entity.Item;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,39 +13,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDaoImpl implements ItemDao {
+
     @Override
-    public boolean saveItem(ItemDto dto) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO item VALUES('" + dto.getCode() + "','" + dto.getDesc() + "','" + dto.getUnitPrice() + "'," + dto.getQty() + ")";
+    public boolean save(Item entity) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO item VALUES('" + entity.getCode() + "','" + entity.getDesc() + "','" + entity.getUnitPrice() + "'," + entity.getQtyOnHand() + ")";
         PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
         //executeUpdate changes the database
         return pstm.executeUpdate(sql)>0;
     }
 
     @Override
-    public boolean updateItem(ItemDto dto) throws SQLException, ClassNotFoundException {
-        String sql = "UPDATE item SET code='" + dto.getCode() + "', `description`='" + dto.getDesc() + "', unitPrice='" + dto.getUnitPrice() + "', qtyOnHand='" + dto.getQty() + "' WHERE code = '" + dto.getCode() + "'";
+    public boolean update(Item entity) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE item SET code='" + entity.getCode() + "', `description`='" + entity.getDesc() + "', unitPrice='" + entity.getUnitPrice() + "', qtyOnHand='" + entity.getQtyOnHand() + "' WHERE code = '" + entity.getCode() + "'";
         PreparedStatement stm = DBConnection.getInstance().getConnection().prepareStatement(sql);
-         // Execute the prepared statement, not the SQL query
+        // Execute the prepared statement, not the SQL query
         return stm.executeUpdate()>0;
     }
 
     @Override
-    public boolean deleteItem(String code) throws SQLException, ClassNotFoundException {
-        String sql = "DELETE FROM item WHERE code='" + code + "'";
+    public boolean delete(String value) throws SQLException, ClassNotFoundException {
+        String sql = "DELETE FROM item WHERE code='" + value + "'";
         PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
         //executeUpdate changes the database
         return pstm.executeUpdate(sql)>0;
     }
 
     @Override
-    public boolean searchItem(String code) throws SQLException, ClassNotFoundException {
-        return false;
-    }
-
-    @Override
-    public List<ItemDto> allItems() throws SQLException, ClassNotFoundException {
+    public List getAll() throws SQLException, ClassNotFoundException {
         //--create a new list
-        List<ItemDto> list = new ArrayList<>();
+        List<Item> list = new ArrayList<>();
 
         //create the entry
         String sql = "SELECT * FROM item";
@@ -53,7 +51,7 @@ public class ItemDaoImpl implements ItemDao {
         ResultSet result = pstm.executeQuery(sql);
         // move the pointer to get all rows and add into the arrayList
         while (result.next()) {
-            list.add(new ItemDto(
+            list.add(new Item(
                     result.getString(1),
                     result.getString(2),
                     result.getDouble(3),
@@ -63,6 +61,7 @@ public class ItemDaoImpl implements ItemDao {
         //return the list
         return list;
     }
+
     public ItemDto getItem(String code) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM item WHERE code=?";
         PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
@@ -78,4 +77,8 @@ public class ItemDaoImpl implements ItemDao {
         return null;
     }
 
+    @Override
+    public ItemDto searchItem(String code) {
+        return null;
+    }
 }

@@ -96,18 +96,12 @@ public class PlaceOrderFormController {
     }
 
     private void loadItemCodes() {
-        try {
-            items = itemDao.allItems();
-            ObservableList list = FXCollections.observableArrayList();
-            for (ItemDto dto : items) {
-                list.add(dto.getCode());
-            }
-            cmbItemCode.setItems((ObservableList) list);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        //items = itemDao.allItems();
+        ObservableList list = FXCollections.observableArrayList();
+        for (ItemDto dto : items) {
+            list.add(dto.getCode());
         }
+        cmbItemCode.setItems((ObservableList) list);
     }
 
     private void loadCustomerId() {
@@ -132,66 +126,66 @@ public class PlaceOrderFormController {
 
     }
 
-    public void addToCartButtonOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        try {
-            //--calculate the Amount using the values in the text fields
-            double amount = itemDao.getItem(cmbItemCode.getValue().toString()).getUnitPrice() * Integer.parseInt(txtQty.getText());
-
-            //--create a button to be added into the table model
-            JFXButton btn = new JFXButton("Delete");
-
-            //--capture the values from the fields to be added into the table
-            OrderTm tm = new OrderTm(
-                    cmbItemCode.getValue().toString(),
-                    txtDesc.getText(),
-                    Integer.parseInt(txtQty.getText()),
-                    amount,
-                    btn
-            );
-
-            //--Delete action button to remove the entry when button is pressed
-            btn.setOnAction(actionEvent1 -> {
-                tmList.remove(tm);
-                //--update the total and table
-                tot -= tm.getAmount();
-                tblOrder.refresh();
-                lblTotal.setText(String.format("%.2f", tot));
-            });
-
-            boolean isExist = false;
-
-            //--for-each for the observableArrayList to avoid adding a new entry if the entry already exists
-            //within the table view
-            for (OrderTm order : tmList) {
-                //--check the code of entry that is equal to the captured code
-                if (order.getCode().equals(tm.getCode())) {
-                    order.setQty(order.getQty() + tm.getQty());
-                    order.setAmount(order.getAmount() + tm.getAmount());
-                    isExist = true; //to avoid adding freshly
-                    tot += tm.getAmount();
-                }
-            }
-
-            //--if an entry is unavailable, add the entry freshly into observableArrayList
-            if (!isExist) {
-                tmList.add(tm);
-                tot += tm.getAmount();
-            }
-
-            //add the observableArrayList into the table view
-            TreeItem<OrderTm> treeObject = new RecursiveTreeItem<OrderTm>(tmList, RecursiveTreeObject::getChildren);
-            tblOrder.setRoot(treeObject);
-            tblOrder.setShowRoot(false);
-
-            //--update the total amount
-            lblTotal.setText(String.format("%.2f", tot));
-            txtQty.setText("");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void addToCartButtonOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+//        try {
+//            //--calculate the Amount using the values in the text fields
+//            double amount = itemDao.getItem(cmbItemCode.getValue().toString()).getUnitPrice() * Integer.parseInt(txtQty.getText());
+//
+//            //--create a button to be added into the table model
+//            JFXButton btn = new JFXButton("Delete");
+//
+//            //--capture the values from the fields to be added into the table
+//            OrderTm tm = new OrderTm(
+//                    cmbItemCode.getValue().toString(),
+//                    txtDesc.getText(),
+//                    Integer.parseInt(txtQty.getText()),
+//                    amount,
+//                    btn
+//            );
+//
+//            //--Delete action button to remove the entry when button is pressed
+//            btn.setOnAction(actionEvent1 -> {
+//                tmList.remove(tm);
+//                //--update the total and table
+//                tot -= tm.getAmount();
+//                tblOrder.refresh();
+//                lblTotal.setText(String.format("%.2f", tot));
+//            });
+//
+//            boolean isExist = false;
+//
+//            //--for-each for the observableArrayList to avoid adding a new entry if the entry already exists
+//            //within the table view
+//            for (OrderTm order : tmList) {
+//                //--check the code of entry that is equal to the captured code
+//                if (order.getCode().equals(tm.getCode())) {
+//                    order.setQty(order.getQty() + tm.getQty());
+//                    order.setAmount(order.getAmount() + tm.getAmount());
+//                    isExist = true; //to avoid adding freshly
+//                    tot += tm.getAmount();
+//                }
+//            }
+//
+//            //--if an entry is unavailable, add the entry freshly into observableArrayList
+//            if (!isExist) {
+//                tmList.add(tm);
+//                tot += tm.getAmount();
+//            }
+//
+//            //add the observableArrayList into the table view
+//            TreeItem<OrderTm> treeObject = new RecursiveTreeItem<OrderTm>(tmList, RecursiveTreeObject::getChildren);
+//            tblOrder.setRoot(treeObject);
+//            tblOrder.setShowRoot(false);
+//
+//            //--update the total amount
+//            lblTotal.setText(String.format("%.2f", tot));
+//            txtQty.setText("");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     public String generateId() {
