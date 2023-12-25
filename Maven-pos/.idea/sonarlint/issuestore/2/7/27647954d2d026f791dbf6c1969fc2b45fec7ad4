@@ -1,0 +1,11 @@
+
+D
+java:S5411"(Use a primitive boolean expression here.(‰îóG8½Ü­üÉ1
+l
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ìû—8±ÇüÉ1
+U
+java:S1854"8Remove this useless assignment to local variable "pstm".(Ìû—8¿Ü­üÉ1
+F
+java:S1481")Remove this unused "pstm" local variable.(Ìû—8ÀÜ­üÉ1
+R
+java:S1128"0Remove this unused import 'entity.OrderDetails'.(óğèûúÿÿÿÿ8´ÇüÉ1

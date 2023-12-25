@@ -19,7 +19,7 @@ public class ItemDaoImpl implements ItemDao {
         String sql = "INSERT INTO item VALUES('" + entity.getCode() + "','" + entity.getDesc() + "','" + entity.getUnitPrice() + "'," + entity.getQtyOnHand() + ")";
         PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
         //executeUpdate changes the database
-        return pstm.executeUpdate(sql)>0;
+        return pstm.executeUpdate(sql) > 0;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ItemDaoImpl implements ItemDao {
         String sql = "UPDATE item SET code='" + entity.getCode() + "', `description`='" + entity.getDesc() + "', unitPrice='" + entity.getUnitPrice() + "', qtyOnHand='" + entity.getQtyOnHand() + "' WHERE code = '" + entity.getCode() + "'";
         PreparedStatement stm = DBConnection.getInstance().getConnection().prepareStatement(sql);
         // Execute the prepared statement, not the SQL query
-        return stm.executeUpdate()>0;
+        return stm.executeUpdate() > 0;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class ItemDaoImpl implements ItemDao {
         String sql = "DELETE FROM item WHERE code='" + value + "'";
         PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
         //executeUpdate changes the database
-        return pstm.executeUpdate(sql)>0;
+        return pstm.executeUpdate(sql) > 0;
     }
 
     @Override

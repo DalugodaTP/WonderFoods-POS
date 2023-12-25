@@ -1,6 +1,4 @@
 
-q
-java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ê–öşÿÿÿÿ8‡ê–šÉ1
 l
 java:S2095C"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ìû—8è’‘šÉ1
 l
@@ -9,5 +7,7 @@ l
 java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ìû—8†¼˜šÉ1
 l
 java:S20951"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ìû—8¨º’šÉ1
+q
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(·Ê–öşÿÿÿÿ8‡ê–šÉ1
 E
-java:S1128"(Remove this unused import 'dao.CrudDao'.(İ’ÕÅ8¥ûï¤É1
+java:S1128"(Remove this unused import 'dao.CrudDao'.(İ’ÕÅ8è¶üÉ1

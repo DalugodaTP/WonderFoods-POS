@@ -1,22 +1,16 @@
 package dao.custom.impl;
 
 import dao.util.CrudUtil;
-import db.DBConnection;
 import dto.CustomerDto;
 import dao.custom.CustomerDao;
 import entity.Customer;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDaoImpl implements CustomerDao {
-    @Override
-    public CustomerDto searchCustomer(String id) {
-        return null;
-    }
     @Override
     public boolean save(Customer entity) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO customer VALUES(?,?,?,?)";
@@ -61,5 +55,10 @@ public class CustomerDaoImpl implements CustomerDao {
             ));
         }
         return list; //return a list of customers
+    }
+
+    @Override
+    public CustomerDto searchCustomer(String id) {
+        return null;
     }
 }

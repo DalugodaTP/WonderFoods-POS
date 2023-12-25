@@ -106,5 +106,17 @@ U
 %src/main/java/dao/custom/ItemDao.java,4\b\4bc94e0768f2b44d586ee83f6d1609486caf9763
 \
 ,src/main/java/bo/custom/impl/ItemBoImpl.java,b\4\b462a7d52bfda8233a21218d58e9fececacef184
+U
+%src/main/java/bo/custom/OrdersBo.java,b\4\b43ea86e1f96b00a326efabf6c4c885a967dccf4
+^
+.src/main/java/bo/custom/impl/OrdersBoImpl.java,0\f\0ff2bdda8534c6910d44b4fdacaa9c0211708419
+V
+&src/main/java/dao/custom/OrderDao.java,0\8\0862556bde68ad47794fc754fd19e77b0f13b6d7
+]
+-src/main/java/dao/custom/OrderDetailsDao.java,6\1\618ccafb113838f03b58553ca7e60903bdd2cead
 T
 $src/main/java/bo/custom/OrderBo.java,f\4\f4324142a116e27db58e2a81f2d0e4b8da1cab2a
+]
+-src/main/java/bo/custom/impl/OrderBoImpl.java,3\b\3b7ed7c5f9386b52fcbd273d709e57a03acfa6d2
+d
+4src/main/java/bo/custom/impl/OrderDetailDaoImpl.java,2\7\27647954d2d026f791dbf6c1969fc2b45fec7ad4

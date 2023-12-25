@@ -1,58 +1,68 @@
 package dao.custom.impl;
 
-import db.DBConnection;
-import dto.OrderDto;
+import dao.custom.ItemDao;
+import dao.util.CrudUtil;
 import dao.custom.OrderDetailsDao;
 import dao.custom.OrderDao;
+import db.DBConnection;
+import dto.OrderDto;
+import entity.Item;
+import entity.OrderDetails;
+import entity.Orders;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
+//--Change the data from the dto to entity objects
 public class OrderDaoImpl implements OrderDao {
-    OrderDetailsDao orderDetailsDao = new OrderDetailsDaoImpl();
-
+    private final OrderDetailsDao orderDetailDao = new OrderDetailsDaoImpl();
+    private final ItemDao itemDao = new ItemDaoImpl();
     @Override
-    public boolean saveOrder(OrderDto dto) throws SQLException {
-        //Transaction
-        Connection connection=null;
-        try {
-            connection = DBConnection.getInstance().getConnection();
-            connection.setAutoCommit(false); //do not autosave, wait for manual go ahead
-
-            String sql = "INSERT INTO orders VALUES(?,?,?)";
-            PreparedStatement pstm = connection.prepareStatement(sql);
-            pstm.setString(1, dto.getOrderId());
-            pstm.setString(2, dto.getDate());
-            pstm.setString(3, dto.getCustId());
-            //--if order is saved, then save order details
-            if (pstm.executeUpdate() > 0) {
-                boolean isDetaiedSaved = orderDetailsDao.saveOrderDetails(dto.getList());
-                if (isDetaiedSaved) {
-                    connection.commit(); //manually commit
-                    return true;
-                }
-            }
-        } catch (SQLException |ClassNotFoundException ex) {
-            connection.rollback(); //do not save, delete the saved values (if exception occurs)
-            ex.printStackTrace();
-        }finally {
-            connection.setAutoCommit(true); //revert back the settings to autocommit
-        }
+    public boolean save(Item entity) throws SQLException, ClassNotFoundException {
         return false;
     }
 
-    public OrderDto lastOrder() throws ClassNotFoundException, SQLException {
+    @Override
+    public boolean update(Item entity) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String value) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public List<Item> getAll() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean save(Orders entity, List<OrderDetails> orderDetailList) throws SQLException, ClassNotFoundException {
+//        String sql = "INSERT INTO orders VALUES(?,?,?)";
+//
+//        if (CrudUtil.execute(sql, entity.getId(), entity.getDate(), entity.getCustomerId())) {
+//            boolean isDetailsSaved = orderDetailDao.saveOrderDetails(orderDetailList);
+//            boolean isItemsUpdated = itemDao.update(orderDetailList);
+//            if (isDetailsSaved && isItemsUpdated) {
+//                return true;
+//            }
+//        }
+        return false;
+    }
+
+    @Override
+    public Orders getLastOrder() throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM orders ORDER BY id DESC LIMIT 1";
-        PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = CrudUtil.execute(sql);
         if (resultSet.next()) {
-            return new OrderDto(
+            return new Orders(
                     resultSet.getString(1),
                     resultSet.getString(2),
-                    resultSet.getString(3),
-                    null //order details list
+                    resultSet.getString(3)
             );
         }
         return null;

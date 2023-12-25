@@ -1,9 +1,16 @@
 
-j
-java:S2259&"HA "NullPointerException" could be thrown; "connection" is nullable here.(ëñÖùÿÿÿÿ8ãÏ‘›É1
-e
-java:S2259)"HA "NullPointerException" could be thrown; "connection" is nullable here.(•Üş8ãÏ‘›É1
-l
-java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ĞÿŸÓ8ãÏ‘›É1
-l
-java:S20950"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ìû—8˜´ĞÃÈ1
+H
+java:S1168("+Return an empty collection instead of null.(¥¹ï8±Ÿ§üÉ1
+]	java:S125-"<This block of commented-out lines of code should be removed.(ÀşÑŒúÿÿÿÿ8í•ÓüÉ1
+I
+java:S1128",Remove this unused import 'db.DBConnection'.(Šùà†8ï•ÓüÉ1
+K
+java:S1128")Remove this unused import 'dto.OrderDto'.(æÑµÈùÿÿÿÿ8ï•ÓüÉ1
+M
+java:S1128"0Remove this unused import 'java.sql.Connection'.(¥ËôÖ8ï•ÓüÉ1
+Y
+java:S1128"7Remove this unused import 'java.sql.PreparedStatement'.(òÄ™ƒÿÿÿÿÿ8ï•ÓüÉ1
+N
+java:S1068"2Remove this unused "orderDetailDao" private field.(Ãğ²D8ï•ÓüÉ1
+M
+java:S1068"+Remove this unused "itemDao" private field.(ÇÕ²šüÿÿÿÿ8ï•ÓüÉ1
