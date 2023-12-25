@@ -211,13 +211,6 @@ public class PlaceOrderFormController {
         //-- To confirm if the entry was added into the dabatabase
         boolean isSaved = false;
         try {
-            //test
-
-
-
-
-
-
             //--capture the return from the save method of the implementation
             isSaved = orderBo.saveOrder(new OrderDto(
                     lblOrderId.getText(),
